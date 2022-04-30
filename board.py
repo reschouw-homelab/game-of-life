@@ -31,21 +31,21 @@ class board:
     def get_cell(self, x, y):
         return self.state[x][y]
 
-    def get_num_neighbors(self, x, y):
+    def get_num_neighbors(self, cell_x, cell_y):
         num_neighbors = 0
-        for i in range(x-1, x+2):
-            for j in range(y-1, y+2):
+        for neigh_x in range(cell_x-1, cell_x+2):
+            for neigh_y in range(cell_y-1, cell_y+2):
                 # Don't count itself
-                if((x == i) and (y == j)):
+                if((cell_x == neigh_x) and (cell_y == neigh_y)):
                     continue
                 # Don't count cells outside of width of board
-                if((i < 0) or (i > self.width-1)):
+                if((neigh_x < 0) or (neigh_x > self.width-1)):
                     continue
                 # Don't count cells outside of height of board
-                if((j < 0) or (j > self.height-1)):
+                if((neigh_y < 0) or (neigh_y > self.height-1)):
                     continue
                 # If neighboring cell is alive, increment
-                if(self.state[i][j]):
+                if(self.state[neigh_x][neigh_y]):
                     num_neighbors += 1
         return num_neighbors
     
