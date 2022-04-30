@@ -11,6 +11,7 @@ class board:
         self.state = [[False for x in range(width)] for y in range(height)]
 
     def is_empty(self):
+        """Returns True if no cells are alive"""
         for x in range(self.width):
             for y in range(self.height):
                 if(self.state[x][y]):
@@ -18,20 +19,25 @@ class board:
         return True
 
     def get(self):
+        """Returns current state of play as 2d list"""
         return self.state
 
     def print(self):
+        """Prints the current state of play to the console"""
         for y in range(self.height):
             # I'm likely printing this rotated 90 degrees...
             print(self.state[y])
 
     def set_cell(self, x, y, is_alive):
+        """Sets the given x and y position on the board to be alive or dead"""
         self.state[x][y] = is_alive
     
     def get_cell(self, x, y):
+        """Gets the current state of a cell at the given x and y position"""
         return self.state[x][y]
 
     def get_num_neighbors(self, cell_x, cell_y):
+        """Get the number of live neighbors given an x and y position"""
         num_neighbors = 0
         for neigh_x in range(cell_x-1, cell_x+2):
             for neigh_y in range(cell_y-1, cell_y+2):
@@ -50,6 +56,7 @@ class board:
         return num_neighbors
     
     def iterate(self):
+        """Run one round of the Game of Life"""
         new_state = [[False for x in range(self.width)] for y in range(self.height)]
         for x in range(self.width):
             for y in range(self.height):
