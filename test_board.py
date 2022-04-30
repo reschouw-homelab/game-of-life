@@ -33,7 +33,7 @@ def test_get_neighbors():
     board.set_cell(6,5,True)
     assert(board.get_num_neighbors(5,5) == 2)
 
-def test_get_neighbors_edges():
+def test_get_neighbors_edge_min():
     board = _board.board()
     assert(board.get_num_neighbors(0,0) == 0)
     board.set_cell(0,0,True)
@@ -41,3 +41,20 @@ def test_get_neighbors_edges():
     board.set_cell(1,0,True)
     board.set_cell(1,1,True)
     assert(board.get_num_neighbors(0,0) == 3)
+
+def test_get_neighbors_edge_max():
+    board = _board.board()
+    assert(board.get_num_neighbors(9,9) == 0)
+    board.set_cell(9,9,True)
+    board.set_cell(8,9,True)
+    board.set_cell(9,8,True)
+    board.set_cell(8,8,True)
+    assert(board.get_num_neighbors(9,9) == 3)
+
+def test_iterate_cell_dies():
+    board = _board.board()
+    board.set_cell(5,5, True)
+    board.set_cell(5,6,True)
+    board.iterate()
+    assert(not board.get_cell(5,5))
+    assert(not board.get_cell(5,6))

@@ -1,4 +1,5 @@
 from array import *
+from unittest import case
 
 class board:
     """The game board class"""
@@ -34,12 +35,31 @@ class board:
         num_neighbors = 0
         for i in range(x-1, x+2):
             for j in range(y-1, y+2):
+                # Don't count itself
                 if((x == i) and (y == j)):
                     continue
-                if((x<0) or (x>self.width-1)):
+                # Don't count cells outside of width of board
+                if((i < 0) or (i > self.width-1)):
                     continue
-                if((y<0) or (y>self.height-1)):
+                # Don't count cells outside of height of board
+                if((j < 0) or (j > self.height-1)):
                     continue
+                # If neighboring cell is alive, increment
                 if(self.state[i][j]):
                     num_neighbors += 1
         return num_neighbors
+    
+    def iterate(self):
+        new_state = [[False for x in range(self.width)] for y in range(self.height)]
+        for x in range(self.width):
+            for y in range(self.height):
+                # This needs to be a case, but I don't have internet to look that up right now
+                num_neighbors = self.get_num_neighbors(x,y)
+                if(num_neighbors < 2):
+                    new_state[x][y] = False
+                if(num_neighbors == 2):
+                    new_state[x][y] = self.get_cell(x,y)
+                if(num_neighbors == 3):
+                    new_state[x][y] = True
+                if(num_neighbors > 3):
+                    new_state[x][y] = False
