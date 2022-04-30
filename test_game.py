@@ -8,5 +8,9 @@ def test_create_board():
 def test_get_board():
     board = game.Board()
     empty_state = [[False for x in range(10)] for y in range(10)]
-    assert(board.get_board() == empty_state)
+    assert(board.get() == empty_state)
+
+def test_print_board():
+    board = game.Board(2,2)
+    board.print()
 

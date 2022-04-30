@@ -1,6 +1,5 @@
 from array import *
 
-
 class Board:
     """The game board class"""
 
@@ -13,5 +12,10 @@ class Board:
     def is_empty(self):
         return True
 
-    def get_board(self):
+    def get(self):
         return self.state
+
+    def print(self):
+        for y in range(self.height):
+            print(self.state[y])
+            
