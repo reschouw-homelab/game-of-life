@@ -29,3 +29,17 @@ class board:
     
     def get_cell(self, x, y):
         return self.state[x][y]
+
+    def get_num_neighbors(self, x, y):
+        num_neighbors = 0
+        for i in range(x-1, x+2):
+            for j in range(y-1, y+2):
+                if((x == i) and (y == j)):
+                    continue
+                if((x<0) or (x>self.width-1)):
+                    continue
+                if((y<0) or (y>self.height-1)):
+                    continue
+                if(self.state[i][j]):
+                    num_neighbors += 1
+        return num_neighbors

@@ -25,3 +25,19 @@ def test_cell():
     board.set_cell(0,0,True)
     assert(board.get_cell(0,0) == True)
     assert(board.get_cell(1,0) == False)
+
+def test_get_neighbors():
+    board = _board.board()
+    assert(board.get_num_neighbors(5,5) == 0)
+    board.set_cell(5,6,True)
+    board.set_cell(6,5,True)
+    assert(board.get_num_neighbors(5,5) == 2)
+
+def test_get_neighbors_edges():
+    board = _board.board()
+    assert(board.get_num_neighbors(0,0) == 0)
+    board.set_cell(0,0,True)
+    board.set_cell(0,1,True)
+    board.set_cell(1,0,True)
+    board.set_cell(1,1,True)
+    assert(board.get_num_neighbors(0,0) == 3)
