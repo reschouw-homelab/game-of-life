@@ -53,7 +53,6 @@ class board:
         new_state = [[False for x in range(self.width)] for y in range(self.height)]
         for x in range(self.width):
             for y in range(self.height):
-                # This needs to be a case, but I don't have internet to look that up right now
                 num_neighbors = self.get_num_neighbors(x,y)
                 if(num_neighbors < 2):
                     new_state[x][y] = False
@@ -63,3 +62,4 @@ class board:
                     new_state[x][y] = True
                 if(num_neighbors > 3):
                     new_state[x][y] = False
+        self.state = new_state
