@@ -61,12 +61,16 @@ class board:
         for x in range(self.width):
             for y in range(self.height):
                 num_neighbors = self.get_num_neighbors(x,y)
+                # Cell starves
                 if(num_neighbors < 2):
                     new_state[x][y] = False
+                # Cell stays the same
                 if(num_neighbors == 2):
                     new_state[x][y] = self.get_cell(x,y)
+                # Cell survives or comes alive
                 if(num_neighbors == 3):
                     new_state[x][y] = True
+                # Cell is overcrowded
                 if(num_neighbors > 3):
                     new_state[x][y] = False
         self.state = new_state

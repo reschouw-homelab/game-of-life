@@ -58,3 +58,28 @@ def test_iterate_cell_dies():
     board.iterate()
     assert(not board.get_cell(5,5))
     assert(not board.get_cell(5,6))
+
+def test_iterate_cell_stays():
+    board = _board.board()
+    board.set_cell(5,5, True)
+    board.set_cell(5,6,True)
+    board.iterate()
+    assert(not board.get_cell(5,5))
+    assert(not board.get_cell(5,6))
+
+def test_cell_comes_alive():
+    board = _board.board()
+    board.set_cell(5,6,True)
+    board.set_cell(6,5,True)
+    board.set_cell(6,6,True)
+    board.iterate()
+    assert(board.get_cell(5,5))
+
+def test_cell_gets_overcrowded():
+    board = _board.board()
+    board.set_cell(5,6,True)
+    board.set_cell(6,5,True)
+    board.set_cell(6,6,True)
+    board.set_cell(4,6,True)
+    board.iterate()
+    assert(not board.get_cell(5,5))
