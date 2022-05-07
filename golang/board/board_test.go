@@ -6,7 +6,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestHello(t *testing.T) {
-	friendly := hello()
-	assert.Equal(t, friendly, true, "Code is not being friendly! Expected true")
+func TestEmpty(t *testing.T) {
+	assert.Equal(t, isEmpty(), true, "Expecting board to be empty by default")
 }
