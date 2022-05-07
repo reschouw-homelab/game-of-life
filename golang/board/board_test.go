@@ -22,3 +22,26 @@ func TestGetSet(t *testing.T) {
 	assert.Equal(t, GetCell(board, 0, 0), true, "Expecting 0,0 to be alive")
 	assert.Equal(t, GetCell(board, 9, 9), true, "Expecting 9,9 to be alive")
 }
+
+func TestNumNeighbors(t *testing.T) {
+	board := CreateBoard(10, 10)
+	board = SetCell(board, 5, 5, true)
+	assert.Equal(t, GetNumNeighbors(board, 5, 5), 0, "Cell is expected to be by itself")
+	board = SetCell(board, 5, 6, true)
+	board = SetCell(board, 6, 6, true)
+	assert.Equal(t, GetNumNeighbors(board, 5, 5), 2, "Cell is expected to have two neighbors")
+}
+
+func TestNumNeighborsEdges(t *testing.T) {
+	board := CreateBoard(10, 10)
+	board = SetCell(board, 0, 0, true)
+	assert.Equal(t, GetNumNeighbors(board, 0, 0), 0, "Cell is expected to be by itself")
+	board = SetCell(board, 1, 1, true)
+	board = SetCell(board, 1, 0, true)
+	assert.Equal(t, GetNumNeighbors(board, 0, 0), 2, "Cell is expected to have two neighbors")
+	board = SetCell(board, 9, 9, true)
+	board = SetCell(board, 9, 8, true)
+	board = SetCell(board, 8, 9, true)
+	board = SetCell(board, 8, 8, true)
+	assert.Equal(t, GetNumNeighbors(board, 9, 9), 3, "Cell is expected to have three neighbors")
+}

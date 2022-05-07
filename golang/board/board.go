@@ -29,3 +29,22 @@ func SetCell(board Board, x int, y int, state bool) Board {
 func GetCell(board Board, x int, y int) bool {
 	return board[x][y]
 }
+
+func GetNumNeighbors(board Board, cellX int, cellY int) int {
+	numNeighbors := 0
+	for neighX := cellX - 1; neighX <= cellX+1; neighX++ {
+		for neighY := cellY - 1; neighY <= cellY+1; neighY++ {
+			switch {
+			case (neighX < 0) || (neighX > len(board)-1):
+				continue
+			case (neighY < 0) || (neighY > len(board[neighX])-1):
+				continue
+			case (neighX == cellX) && (neighY == cellY):
+				continue
+			case board[neighX][neighY]:
+				numNeighbors++
+			}
+		}
+	}
+	return numNeighbors
+}
