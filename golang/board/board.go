@@ -1,9 +1,15 @@
 package board
 
-func hello() bool {
-	return true
+type Board [][]bool
+
+func CreateBoard(width int, height int) Board {
+	board := make([][]bool, width)
+	for x := 0; x < width; x++ {
+		board[x] = make([]bool, height)
+	}
+	return board
 }
 
-func isEmpty() bool {
+func IsEmpty(board Board) bool {
 	return true
 }
