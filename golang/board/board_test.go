@@ -45,3 +45,48 @@ func TestNumNeighborsEdges(t *testing.T) {
 	board = SetCell(board, 8, 8, true)
 	assert.Equal(t, GetNumNeighbors(board, 9, 9), 3, "Cell is expected to have three neighbors")
 }
+
+func TestCellStarves(t *testing.T) {
+	board := CreateBoard(10, 10)
+	board = SetCell(board, 5, 5, true)
+	board = Iterate(board)
+	assert.Equal(t, GetCell(board, 5, 5), false, "Cell is expected to starve")
+	board = SetCell(board, 5, 5, true)
+	board = SetCell(board, 5, 6, true)
+	board = Iterate(board)
+	assert.Equal(t, GetCell(board, 5, 5), false, "Cell is expected to starve")
+}
+
+func TestCellNoChange(t *testing.T) {
+	board := CreateBoard(10, 10)
+	board = SetCell(board, 5, 5, true)
+	board = SetCell(board, 6, 5, true)
+	board = SetCell(board, 5, 6, true)
+	board = Iterate(board)
+	assert.Equal(t, GetCell(board, 5, 5), true, "Cell is expected to stay alive")
+	board = CreateBoard(10, 10)
+	board = SetCell(board, 6, 5, true)
+	board = SetCell(board, 5, 6, true)
+	board = Iterate(board)
+	assert.Equal(t, GetCell(board, 5, 5), false, "Cell is expected to stay dead")
+}
+
+func TestCellComesAlive(t *testing.T) {
+	board := CreateBoard(10, 10)
+	board = SetCell(board, 5, 6, true)
+	board = SetCell(board, 6, 5, true)
+	board = SetCell(board, 4, 4, true)
+	board = Iterate(board)
+	assert.Equal(t, GetCell(board, 5, 5), true, "Cell is expected to come alive")
+}
+
+func TestCellIsOvercrowded(t *testing.T) {
+	board := CreateBoard(10, 10)
+	board = SetCell(board, 5, 5, true)
+	board = SetCell(board, 4, 5, true)
+	board = SetCell(board, 5, 4, true)
+	board = SetCell(board, 4, 4, true)
+	board = SetCell(board, 5, 6, true)
+	board = Iterate(board)
+	assert.Equal(t, GetCell(board, 5, 5), false, "Cell is expected to starve")
+}

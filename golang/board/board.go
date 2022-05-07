@@ -48,3 +48,25 @@ func GetNumNeighbors(board Board, cellX int, cellY int) int {
 	}
 	return numNeighbors
 }
+
+func Iterate(board Board) Board {
+	nextBoard := make([][]bool, len(board))
+	for x := 0; x < len(board); x++ {
+		nextBoard[x] = make([]bool, len(board[x]))
+	}
+	for x := 0; x < len(board); x++ {
+		for y := 0; y < len(board[x]); y++ {
+			switch numNeighbors := GetNumNeighbors(board, x, y); {
+			case numNeighbors < 2:
+				nextBoard[x][y] = false
+			case numNeighbors == 2:
+				nextBoard[x][y] = board[x][y]
+			case numNeighbors == 3:
+				nextBoard[x][y] = true
+			case numNeighbors > 3:
+				nextBoard[x][y] = false
+			}
+		}
+	}
+	return nextBoard
+}
